@@ -8,7 +8,7 @@ Please change it to suit your needs.
 
 ## Background
 The first task was to find a wordlist with a decent amount of words. I got a word list from [Basic English][1] with over 29,000 words in it.
-From there I opened a few old reports and books and pasted a lot of text into the file to increase the word count. I then wrote [parser.py] to strip out and seperate all the words into a dictionary type format.
+From there I opened a few old reports and books and pasted a lot of text into the file to increase the word count. I then wrote [parser.py](parser.py) to strip out and seperate all the words into a dictionary type format.
 
 ## Words list
 My words list is in the file [wordslist.txt](wordslist.txt) in this repoistory/gist.
