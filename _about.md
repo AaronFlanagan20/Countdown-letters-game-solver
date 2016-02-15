@@ -1,5 +1,5 @@
-### Student name (e.g. Ian McLoughlin)
-#### Student number (e.g. G00123456)
+### Aaron Flanagan
+#### G00330035
 
 # Countdown Letters Game Solver
 Insert introduction here.
