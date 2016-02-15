@@ -7,12 +7,12 @@ This gist is just an example of how you might layout your submission.
 Please change it to suit your needs.
 
 ## Background
-The first task I completed as part of this project was to Google "countdown letters game solver".
-Google gave me two relevant results on the first page, these are [Cool Project name][2] and [Cool Solver][3].
+The first task was to find a wordlist with a decent amount of words. I got a word list from [Basic English][1] with over 29,000 words in it.
+From there I opened a few old reports and books and pasted a lot of text into the file to increase the word count. I then wrote [parser.py] to strip out and seperate all the words into a dictionary type format.
 
 ## Words list
 My words list is in the file [wordslist.txt](wordslist.txt) in this repoistory/gist.
-I got my words list from the [Oxford Learner's Dictionaries][1] website.
+As I explained above I got the original list [meanings.txt](meanings.txt) from [Basic English][1] with over 29,000 words and manually added to it. The final word count comes in at 64,451 words in the file. 
 
 ## Python script
 My script is in the files [solver.py](solver.py) in this repository and it works as follows.
@@ -43,6 +43,6 @@ My script runs very quickly, and certainly within the 30 seconds allowed in the 
 
 
 ## References
-[1]: http://www.oxfordlearnersdictionaries.com/wordlist/english/oxford3000/
+[1]: http://www.basic-english.org/down/download.html
 [2]: http://www.oxfordlearnersdictionaries.com/wordlist/english/oxford3000/
 [3]: http://www.oxfordlearnersdictionaries.com/wordlist/english/oxford3000/
