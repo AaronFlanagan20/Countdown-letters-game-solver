@@ -2,24 +2,26 @@
 #### G00330035
 
 # Countdown Letters Game Solver
-Insert introduction here.
-This gist is just an example of how you might layout your submission.
-Please change it to suit your needs.
+As part of a module, Theory of Algorithms, for my final year I had to write this algorithm to solve the [Countdown letters game][1].
+I also had to right a report about the algorithm and compare different methods and efficiency of each task, all below.
 
 ## Background
-The first task was to find a wordlist with a decent amount of words. I got a word list from [Basic English][1] with over 29,000 words in it.
-From there I opened a few old reports and books and pasted a lot of text into the file to increase the word count. I then wrote [parser.py](parser.py) to strip out and seperate all the words into a dictionary type format.
+The first task was to find a wordlist with a decent amount of words. I got a word list from [Basic English][2] with over 29,000 words in it, which is quite small.
+From there I opened a few old reports, assignments and books and pasted a lot of text into the file to increase the word count. I then wrote [parser.py](parser.py) to strip out and seperate all the words into a dictionary type format.
+Next I was on to actually write the algorithm to sort through the words and return the first nine letter word found that contained all the letters specified.
 
-## Words list
-My words list is in the file [wordslist.txt](wordslist.txt) in this repository/gist.
-As I explained above I got the original list [meanings.txt](meanings.txt) from [Basic English][1] with over 29,000 words and manually added to it by using old reports and two wordlist files found [here][2]. The final word count comes in at over 105,800 words give or take in the file. 
+## Word list
+My word list is in the file [wordlist.txt](wordlist.txt) in this repository/gist.
+As I explained above I got the original list [meanings.txt](meanings.txt) from [Basic English][1] with over 29,000 words and manually added to it by using old reports and two wordlist files found [here][3]. The final word count comes in at over 105,800 words give or take in the file. 
 
 ## Python script
-My script [solver.py](solver.py) in this repository and it works as follows.
+My script [solver.py](solver.py) is in this repository and it works as follows.
 
-First it has some preprocessing to do. It has to read through all the words and append them to an array, removing all the words with a length greater than 9.
+First it has some preprocessing to do. It has to read through all the words and appends them to a list, while removing all the words with a length greater than 9.
 
 ```python
+MAX_LENGTH = 9
+# This preprocessing function loads the words list file into a Python list.
 def preprocessing():
 	read = open('wordlist.txt', 'r')
 	data = read.read()
@@ -59,6 +61,6 @@ My script runs very quickly, and certainly within the 30 seconds allowed in the 
 
 
 ## References
-[1]: http://www.basic-english.org/down/download.html
-[2]: http://www.curlewcommunications.co.uk/wordlist.html
-[3]: http://www.oxfordlearnersdictionaries.com/wordlist/english/oxford3000/
+[1]: https://en.wikipedia.org/wiki/Countdown_(game_show)
+[2]: http://www.basic-english.org/down/download.html
+[3]: http://www.curlewcommunications.co.uk/wordlist.html
