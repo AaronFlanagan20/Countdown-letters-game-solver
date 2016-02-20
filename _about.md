@@ -14,10 +14,44 @@ Next I was on to actually write the algorithm to sort through the words and retu
 My word list is in the file [wordlist.txt](wordlist.txt) in this repository/gist.
 As I explained above I got the original list [meanings.txt](meanings.txt) from [Basic English][1] with over 29,000 words and manually added to it by using old reports and two wordlist files found [here][3]. The final word count comes in at over 105,800 words give or take in the file. 
 
-## Python script
-My script [solver.py](solver.py) is in this repository and it works as follows.
+## Parser.py
+My [parser.py](parser.py) file in this repository does the following:
+It loops through the file that was just passed in, [meanings.txt](meanings.txt), and retrieves each word by splitting the spaces between them.
+We then apply a regular expression to remove all the characters that are not letters and change them to lowercase.
+Once done it checks a Python set to see if it contains the word, if not it's added, else it's ignored.
+When the set doesn't contain the word, the word is added to the list and written to [wordlist.txt](wordlist.txt)
 
-First it has some preprocessing to do. It has to read through all the words and appends them to a list, while removing all the words with a length greater than 9.
+```python
+import re
+
+g = open('meanings.txt', 'r')##open 
+f = open('wordlist.txt', 'w')## write
+
+## This code was written and then adapated from a post on Stackoverflow about checking for duplicate words
+## http://stackoverflow.com/questions/12937798/how-can-i-find-duplicate-lines-in-a-text-file-excluding-case-and-print-them
+
+##and another page describing how a regular expression pattern works for splitting
+##http://stackoverflow.com/questions/1276764/stripping-everything-but-alphanumeric-chars-from-a-string-in-python
+seen = set()
+i = 0
+for line in g:
+	for a in line.split():##split by spaces
+		newString = re.sub(r'[^a-z]', "", a.lower())## sub all non ascii letters and lowercase them
+		if newString not in seen and len(newString) > 2:##if not in set and has atleast 2 letters
+			seen.add(newString)##add to set
+			f.write(newString)##write to file
+			f.write("\n")##append line for dictionary format
+			i = i + 1
+
+print("Words in file: ", i)
+```
+
+## Preprocessing
+My script does a lot of preprocessing, which only needs to be run once.
+Once the preprocessing is done we can run the game solver again and again without that overhead.
+It is done as follows:
+It has to read through all the words and append them to a list, while removing all the words with a length greater than 9.
+All the words are then returned in a list for the next function to traverse.
 
 ```python
 MAX_LENGTH = 9
@@ -34,7 +68,10 @@ def preprocessing():
 
 	return contents
 ```
-The most important section then follows. It first allows a user to input their own choice of letters or uses letters provided:
+
+## Python script
+My script [solver.py](solver.py) is in this repository and it works as follows.
+It first allows a user to input their own choice of letters or uses letters provided:
 
 ```python
 import random
@@ -49,16 +86,11 @@ import nothing
 ```
 That didn't work too well, so I changed it.
 
-## Preprocessing
-My script does a lot of preprocessing, which only needs to be run once.
-Once the preprocessing is done we can run the game solver again and again without that overhead.
-
 ## Efficiency
 Here's some stuff about how efficient my code is, including an analysis of how many calculations my algorithm requires.
 
 ## Results
 My script runs very quickly, and certainly within the 30 seconds allowed in the Coutdown letters game.
-
 
 ## References
 [1]: https://en.wikipedia.org/wiki/Countdown_(game_show)
