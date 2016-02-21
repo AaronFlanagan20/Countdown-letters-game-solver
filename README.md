@@ -107,13 +107,19 @@ import random as rn
 ## adapated from http://stackoverflow.com/questions/2823316/generate-a-random-letter-in-python
 ## shows the option of using random choice
 def generateLetters():
-	vowels = "aeiouy"
-	consonents = 'bcdfghjklmnpqrstvwxz'
+	vowels = "aeiou"
+	consonents = 'bcdfghjklmnpqrstvwxyz'
 	generatedLetters = []
 	count = 1
 	x = input("How many vowels would like? ")
+	if int(x) > 9:
+		print("You must select les than 9 vowels")
+		sys.exit()
+
 	while count < 10:
 		while count <= int(x):
+			if count == 9:
+				break;
 			choice = rn.choice(vowels)
 			count = count + 1
 			generatedLetters.append(choice)
