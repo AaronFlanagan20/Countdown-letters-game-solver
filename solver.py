@@ -4,6 +4,7 @@
 
 # Import random to shuffle a list.
 import random as rn
+import timeit
 
 MAX_LENGTH = 9
 # This preprocessing function loads the words list file into a Python list.
@@ -21,10 +22,12 @@ def preprocessing():
   
 # This is the function that actually checks the random letters for words.
 def check(letters):
+
   while (letters):
     letters.pop()
   return []
 
-
-# This function is just a wrapper that shows how my script works.
 # It does the preprocessing, then creates a random list of letters, and finally runs the solver.
+if __name__ == '__main__':
+	t = timeit.Timer("preprocessing()", "from __main__ import preprocessing")
+	print(t.timeit(1))

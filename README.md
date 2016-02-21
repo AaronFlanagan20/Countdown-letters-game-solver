@@ -78,6 +78,25 @@ def preprocessing():
 	return contents
 ```
 
+### Timing Preprocessing
+The above code only needs to be run once. Once a list of words is generated there is no need to regenerate it every time we check for words for the random letters. So I applied the same principle to this section of code as I did to the [parser.py](parser.py) code above. I ran the snippet of code once and the average came in at 0.07 seconds. When ran 10 times the average came in at .75 seconds. Now notice our code looks like the following 
+```python
+read = open('wordlist.txt', 'r')
+data = read.read()
+read.close()
+
+contents = []
+for i in data.split():
+```
+The file being read is returned as a string type and then we iterate through the string, which gives us the 0.07 second average when run once. But when I first iterated through the read object like so: ```python for i in read: ``` the average time came in at .8 seconds. The more efficient approach for preprocessing my list was to iterate over a very large string Data then the TextIOWrapper object read.
+
+The final snippet of code to test just the preprocessing stage:
+```python
+if __name__ == '__main__':
+	t = timeit.Timer("preprocessing()", "from __main__ import preprocessing")
+	print(t.timeit(1))
+```
+
 ## Python script
 My script [solver.py](solver.py) is in this repository and it works as follows.
 It first allows a user to input their own choice of letters or uses letters provided:
