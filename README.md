@@ -21,29 +21,38 @@ We then apply a regular expression to remove all the characters that are not let
 Once done it checks a Python set to see if it contains the word, if not it's added, else it's ignored.
 When the set doesn't contain the word, the word is added to the list and written to [wordlist.txt](wordlist.txt)
 
+### Timing Parser.py
+By default the timeit function in Python trys to run the code 1,000,000 times, but since the parser only needs to be ran once we define below only run the code once in the print statement. The average comes in between 6.8 - 7.0 seconds for a file with 110,000 words give or take. When ran 10 times the time printed is around 68 - 70 seconds, which divided by ten still gives 7.0 seconds of an average. But with every language standard I/O comes with a price on the time it takes to complete a function. When we take the print function out the average time to complete drops to 67 seconds. Although it's a miniscule amount of time, we must keep in mind that if it was a file with over +300,000 words it would save a lot of time.
+
+### Parser.py code
 ```python
 import re
+import timeit
 
-g = open('meanings.txt', 'r')##open 
-f = open('wordlist.txt', 'w')## write
+def parse():
+	g = open('meanings.txt', 'r')##open 
+	f = open('wordlist.txt', 'w')## write
 
-## This code was written and then adapated from a post on Stackoverflow about checking for duplicate words
-## http://stackoverflow.com/questions/12937798/how-can-i-find-duplicate-lines-in-a-text-file-excluding-case-and-print-them
+	## This code was written and then adapated from a post on Stackoverflow about checking for duplicate words
+	## http://stackoverflow.com/questions/12937798/how-can-i-find-duplicate-lines-in-a-text-file-excluding-case-and-print-them
 
-##and another page describing how a regular expression pattern works for splitting
-##http://stackoverflow.com/questions/1276764/stripping-everything-but-alphanumeric-chars-from-a-string-in-python
-seen = set()
-i = 0
-for line in g:
-	for a in line.split():##split by spaces
-		newString = re.sub(r'[^a-z]', "", a.lower())## sub all non ascii letters and lowercase them
-		if newString not in seen and len(newString) > 2:##if not in set and has atleast 2 letters
-			seen.add(newString)##add to set
-			f.write(newString)##write to file
-			f.write("\n")##append line for dictionary format
-			i = i + 1
+	##and another page describing how a regular expression pattern works for splitting
+	##http://stackoverflow.com/questions/1276764/stripping-everything-but-alphanumeric-chars-from-a-string-in-python
+	seen = set()
+	i = 0
+	for line in g:
+		for a in line.split():##split by spaces
+			newString = re.sub(r'[^a-z]', "", a.lower())## sub all non ascii letters and lowercase them
+			if newString not in seen and len(newString) > 2:##if not in set and has atleast 2 letters
+				seen.add(newString)##add to set
+				f.write(newString)##write to file
+				f.write("\n")##append line for dictionary format
+				i = i + 1
 
-print("Words in file: ", i)
+	print("Words in file: ", i)
+
+t = timeit.Timer("parse()", "from __main__ import parse")
+print(t.timeit(10))
 ```
 
 ## Preprocessing
