@@ -88,7 +88,7 @@ read.close()
 contents = []
 for i in data.split():
 ```
-The file being read is returned as a string type and then we iterate through the string, which gives us the 0.07 second average when run once. But when I first iterated through the read object like so: ```python for i in read: ``` the average time came in at .8 seconds. The more efficient approach for preprocessing my list was to iterate over a very large string Data then the TextIOWrapper object read.
+The file being read is returned as a string type and then we iterate through the string, which gives us the 0.07 second average when run once. But when I first iterated through the read object like so: ```for i in read:``` the average time came in at .8 seconds. The more efficient approach for preprocessing my list was to iterate over a very large string Data then the TextIOWrapper object read.
 
 The final snippet of code to test just the preprocessing stage:
 ```python
@@ -99,20 +99,44 @@ if __name__ == '__main__':
 
 ## Python script
 My script [solver.py](solver.py) is in this repository and it works as follows.
-It first allows a user to input their own choice of letters or uses letters provided:
+It first does it's preprocessing task as explained above. Next it will ask the user how many vowels they want and call the generateLetters function that returns a list of randomly chosen letters.
 
 ```python
-import random
-print(random.shuffle("My code is cool."))
+import random as rn
+
+## adapated from http://stackoverflow.com/questions/2823316/generate-a-random-letter-in-python
+## shows the option of using random choice
+def generateLetters():
+	vowels = "aeiouy"
+	consonents = 'bcdfghjklmnpqrstvwxz'
+	generatedLetters = []
+	count = 1
+	x = input("How many vowels would like? ")
+	while count < 10:
+		while count <= int(x):
+			choice = rn.choice(vowels)
+			count = count + 1
+			generatedLetters.append(choice)
+
+		count = count + 1
+		generatedLetters.append(rn.choice(consonents))
+
+	return generatedLetters
 ```
 
-Previously it looks like this:
+Previously it looked like this, just randomly generating:
 ```python
-# Note that the following snippet of code was adapted from
-# the Stack Overflow post available here: http://www.so.com/post/123
-import nothing
+def generateLetters():
+	letters = 'abcdefghijklmnopqrstuvwxyz'
+	generatedLetters = []
+	count = 1
+	while count < 10:
+		count = count + 1
+		generatedLetters.append(rn.choice(letters))
+
+	return generatedLetters
 ```
-That didn't work too well, so I changed it.
+That didn't work too well, so I changed it because the majority of English words contain a vowel or more and you could get a list with no vowels in it.
 
 ## Efficiency
 Here's some stuff about how efficient my code is, including an analysis of how many calculations my algorithm requires.
