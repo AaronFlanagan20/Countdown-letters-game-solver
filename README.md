@@ -3,7 +3,7 @@
 
 # Countdown Letters Game Solver
 As part of a module, Theory of Algorithms, for my final year I had to write this algorithm to solve the [Countdown letters game][1].
-I also had to right a report about the algorithm and compare different methods and efficiency of each task, all below.
+I also had to write a report about the algorithm and compare different methods and the efficiency of each method. This included research into various Python optimization techniques and how to properly time each method taking into consideration some functions need only be run once but might take a considerate amount of time for I/O, like writing to a file or printing results.
 
 ## Background
 The first task was to find a wordlist with a decent amount of words. I got a word list from [Basic English][2] with over 29,000 words in it, which is quite small.
@@ -22,7 +22,7 @@ Once done it checks a Python set to see if it contains the word, if not it's add
 When the set doesn't contain the word, the word is added to the list and written to [wordlist.txt](wordlist.txt)
 
 ### Timing Parser.py
-By default the timeit function in Python trys to run the code 1,000,000 times, but since the parser only needs to be ran once we define below only run the code once in the print statement. The average comes in between 6.8 - 7.0 seconds for a file with 110,000 words give or take. When ran 10 times the time printed is around 68 - 70 seconds, which divided by ten still gives 7.0 seconds of an average. But with every language standard I/O comes with a price on the time it takes to complete a function. When we take the print function out the average time to complete drops to 67 seconds. Although it's a miniscule amount of time, we must keep in mind that if it was a file with over +300,000 words it would save a lot of time.
+By default the timeit function in Python trys to run the code 1,000,000 times, but since the parser only needs to run once, we define below only run the code once in the print statement. The average time to finish comes in between 6.8 - 7.0 seconds for a file with 110,000 words give or take. When timeit runs it 10 times the average time printed is between 68 - 70 seconds, which divided by 10 still gives 6.8 - 7.0 seconds of an average. But with every language standard I/O comes with a price on the time it takes to complete a function. When we take the print function out the average time to complete the average drops to 67 seconds. Although it's a miniscule amount of time, we must keep in mind that if it was a file with over +300,000 words or we if parsed every English word known to man it would save a lot of time.
 
 ### Parser.py code
 ```python
