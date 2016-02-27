@@ -23,16 +23,18 @@ def preprocessing():
 
 ## adapated from http://stackoverflow.com/questions/2823316/generate-a-random-letter-in-python
 ## shows the option of using random choice
-def generateLetters():
-	vowels = "aeiou"
-	consonents = 'bcdfghjklmnpqrstvwxyz'
-	generatedLetters = []
-	count = 1
-	x = input("How many vowels would like? ")
-	if int(x) > 9:
-		print("You must select les than 9 vowels")
-		sys.exit()
+## changed to allow the fact that each pile must be weigthed according to their frequency in natural English
 
+def generateLetters():
+	generatedLetters = []
+	vowels = "eeeeeeeeeeeeaaaaaaaaaiiiiiiiiioooooooouuuu"
+	consonents = 'nnnnnnrrrrrrttttttllllssssddddgggbbccmmppffhhvvwwyykjxqz'
+	x = input("How many vowels would you like? ")
+	if int(x) < 3 or int(x) > 5:
+		print("You must select between 3 and 5 vowels")
+		sys.exit()
+	
+	count = 1
 	while count < 10:
 		while count <= int(x):
 			if count == 9:
@@ -48,14 +50,14 @@ def generateLetters():
 	
   
 # This is the function that actually checks the random letters for words.
-def check(letters):
-
-  while (letters):
-    letters.pop()
-  return []
+def check():
+	result = {}
+	letters = generateLetters()
+	
+	
 
 # It does the preprocessing, then creates a random list of letters, and finally runs the solver.
 if __name__ == '__main__':
 	##t = timeit.Timer("preprocessing()", "from __main__ import preprocessing")
 	##print(t.timeit(1))
-	print(generateLetters())
+	check()

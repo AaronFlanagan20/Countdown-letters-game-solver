@@ -142,7 +142,7 @@ def generateLetters():
 
 	return generatedLetters
 ```
-That didn't work too well, so I changed it because the majority of English words contain a vowel or more and you could get a list with no vowels in it.
+That didn't work too well, so I changed it because the majority of English words contain a vowel or more and you could get a list with no vowels in it. It was also changed because according to the [Countdown letters game][1] game show, letters within each pile are weighted according to their frequency in natural English, and the rules clearly state you must have atleast three vowels and four consonants which I didn't abide by originally. So research was done and [this][4] was found. The author explains the algorithm he wrote and it's efficiency. 
 
 ## Efficiency
 Here's some stuff about how efficient my code is, including an analysis of how many calculations my algorithm requires.
@@ -154,3 +154,4 @@ My script runs very quickly, and certainly within the 30 seconds allowed in the 
 [1]: https://en.wikipedia.org/wiki/Countdown_(game_show)
 [2]: http://www.basic-english.org/down/download.html
 [3]: http://www.curlewcommunications.co.uk/wordlist.html
+[4]: http://blog.blakehemingway.co.uk/?p=1
