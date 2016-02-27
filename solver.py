@@ -65,6 +65,8 @@ def check():
 			copy.append(word)
 			result[length] = copy##re appends result with the new word for that word size	
 
+	#print(max(result[length]))
+
 def is_word_possible(word, given_chars):
     wordchars = list(word)
     u_wordchars = copy.deepcopy(given_chars)
@@ -79,6 +81,5 @@ def is_word_possible(word, given_chars):
 
 # It does the preprocessing, then creates a random list of letters, and finally runs the solver.
 if __name__ == '__main__':
-	##t = timeit.Timer("preprocessing()", "from __main__ import preprocessing")
-	##print(t.timeit(1))
-	check()
+	t = timeit.Timer("check()", "from __main__ import check")
+	print(t.timeit(1))

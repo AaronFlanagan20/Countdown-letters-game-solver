@@ -180,6 +180,12 @@ def check():
 			##re-appends result with the new word for that word size
 ```
 
+## Timing the algorithm
+I needed to time the algorithm to test how efficient it worked. The check() method was the main component to be tested, but it also carries the burden of 2 other methods to complete during it, generateLetters() at the start and preprocessing during it's checking.
+We already discussed the preprocessing section above and it's average time is 0.07. I needed to time the letters generation aswell in the same manner as above and that came in at 0.9 on average when the user had to input how many vowels they wanted, and 2.5 average when there was no input needed. So far we have 0.97 average on the check method and no checks have been done.
+
+The average time for the check method to complete and return all the results, including the overhead from the other two methods is 2.4 seconds.
+
 ## Efficiency
 Here's some stuff about how efficient my code is, including an analysis of how many calculations my algorithm requires.
 
