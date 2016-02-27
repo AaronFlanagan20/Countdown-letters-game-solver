@@ -99,11 +99,38 @@ if __name__ == '__main__':
 
 ## Python script
 My script [solver.py](solver.py) is in this repository and it works as follows.
-It first does it's preprocessing task as explained above. Next it will ask the user how many vowels they want and call the generateLetters function that returns a list of randomly chosen letters.
+It first does it's preprocessing task as explained above. Next it will call the generateLetters function that returns a list of randomly chosen letters. It will then loop through each word and check if they contain any of the letters, if so it will return true and append the result array with the new word and it's size, else it breaks and loops again.
 
 ```python
-import random as rn
+## adapated from http://stackoverflow.com/questions/2823316/generate-a-random-letter-in-python
+## shows the option of using random choice
+## changed to allow the fact that each pile must be weigthed according to their frequency in natural English
+def generateLetters():
+	generatedLetters = []
+	vowels = "eeeeeeeeeeeeaaaaaaaaaiiiiiiiiioooooooouuuu"
+	consonents = 'nnnnnnrrrrrrttttttllllssssddddgggbbccmmppffhhvvwwyykjxqz'
+	x = input("How many vowels would you like? ")
+	if int(x) < 3 or int(x) > 5:
+		print("You must select between 3 and 5 vowels")
+		sys.exit()
+	
+	count = 1
+	while count < 10:
+		while count <= int(x):
+			if count == 9:
+				break;
+			choice = rn.choice(vowels)
+			count = count + 1
+			generatedLetters.append(choice)
 
+		count = count + 1
+		generatedLetters.append(rn.choice(consonents))
+
+	return generatedLetters
+```
+
+Previously it looked like this, it didn't count the weight of each letter or abide by the rules of a minimum of 3 vowels and 4 consonants:
+```python
 ## adapated from http://stackoverflow.com/questions/2823316/generate-a-random-letter-in-python
 ## shows the option of using random choice
 def generateLetters():
@@ -129,20 +156,29 @@ def generateLetters():
 
 	return generatedLetters
 ```
+That didn't work too well, so I changed it because the majority of English words contain a vowel or more and you could get a list with no vowels in it. It was also changed because according to the [Countdown letters game][1] game show, letters within each pile are weighted according to their frequency in natural English, and the rules clearly state you must have atleast three vowels and four consonants which I didn't abide by originally. So research was done and [this][4] was found. The author explains the algorithm he wrote, it's efficiency and how each iteration checks the words passed in for the letters generated. 
 
-Previously it looked like this, just randomly generating:
+This is the section where it checks each letter and appends the new words to the results, ending with largest words at the end.
+
 ```python
-def generateLetters():
-	letters = 'abcdefghijklmnopqrstuvwxyz'
-	generatedLetters = []
-	count = 1
-	while count < 10:
-		count = count + 1
-		generatedLetters.append(rn.choice(letters))
+# This is the function that actually checks the random letters for words.
+## used from http://loskundos.blogspot.ie/2015/03/countdown-word-game-solver-python.html
+def check():
+	letters = generateLetters()
+	result = {}
+	for word in preprocessing():
+		if is_word_possible(word, letters):## returns True if any letter is in word
+			length = len(word)
+			try:
+				copy = result[length]
+				## keeps track of everything in result at that word size
+			except KeyError:
+				copy = []
 
-	return generatedLetters
+			copy.append(word)
+			result[length] = copy
+			##re-appends result with the new word for that word size
 ```
-That didn't work too well, so I changed it because the majority of English words contain a vowel or more and you could get a list with no vowels in it. It was also changed because according to the [Countdown letters game][1] game show, letters within each pile are weighted according to their frequency in natural English, and the rules clearly state you must have atleast three vowels and four consonants which I didn't abide by originally. So research was done and [this][4] was found. The author explains the algorithm he wrote and it's efficiency. 
 
 ## Efficiency
 Here's some stuff about how efficient my code is, including an analysis of how many calculations my algorithm requires.
@@ -154,4 +190,4 @@ My script runs very quickly, and certainly within the 30 seconds allowed in the 
 [1]: https://en.wikipedia.org/wiki/Countdown_(game_show)
 [2]: http://www.basic-english.org/down/download.html
 [3]: http://www.curlewcommunications.co.uk/wordlist.html
-[4]: http://blog.blakehemingway.co.uk/?p=1
+[4]: http://loskundos.blogspot.ie/2015/03/countdown-word-game-solver-python.html

@@ -15,7 +15,7 @@ def parse():
 	for line in g:
 		for a in line.split():##split by spaces
 			newString = re.sub(r'[^a-z]', "", a.lower())## sub all non ascii letters and lowercase them
-			if newString not in seen and len(newString) > 2:##if not in set and has atleast 2 letters
+			if newString not in seen and len(newString) > 3:##if not in set and has atleast 2 letters
 				seen.add(newString)##add to set
 				f.write(newString)##write to file
 				f.write("\n")##append line for dictionary format
