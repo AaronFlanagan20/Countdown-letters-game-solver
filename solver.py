@@ -37,8 +37,6 @@ def generateLetters():
 	count = 1
 	while count < 10:
 		while count <= int(x):
-			if count == 9:
-				break;
 			choice = rn.choice(vowels)
 			count = count + 1
 			generatedLetters.append(choice)
@@ -52,9 +50,10 @@ def generateLetters():
 # This is the function that actually checks the random letters for words.
 ## used from http://loskundos.blogspot.ie/2015/03/countdown-word-game-solver-python.html
 def check():
+	p = preprocessing()
 	letters = generateLetters()
-	result = {}
-	for word in preprocessing():
+	result = {}	
+	for word in p:
 		if is_word_possible(word, letters):## returns True if any letter is in word
 			length = len(word)
 			try:
@@ -65,7 +64,9 @@ def check():
 			copy.append(word)
 			result[length] = copy##re appends result with the new word for that word size	
 
-	#print(max(result[length]))
+	##le = max(len(x) for x in result)
+	print(result)
+	print(result[sorted(result.keys())[-1]])
 
 def is_word_possible(word, given_chars):
     wordchars = list(word)

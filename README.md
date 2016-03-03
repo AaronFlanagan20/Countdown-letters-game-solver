@@ -164,33 +164,48 @@ This is the section where it checks each letter and appends the new words to the
 # This is the function that actually checks the random letters for words.
 ## used from http://loskundos.blogspot.ie/2015/03/countdown-word-game-solver-python.html
 def check():
+	p = preprocessing()
 	letters = generateLetters()
-	result = {}
-	for word in preprocessing():
+	result = {}	
+	for word in p:
 		if is_word_possible(word, letters):## returns True if any letter is in word
 			length = len(word)
 			try:
-				copy = result[length]
-				## keeps track of everything in result at that word size
+				copy = result[length]## keeps track of everything in result at that word size
 			except KeyError:
 				copy = []
 
 			copy.append(word)
-			result[length] = copy
-			##re-appends result with the new word for that word size
+			result[length] = copy##re appends result with the new word for that word size	
+
+	#print(max(result[length]))
+```
+
+Update loop changed because it is faster to call a method once and iterate over it's contents:
+Before change:
+```python
+letters = generateLetters()
+	result = {}
+	for word in preprocessing():
 ```
 
 ## Timing the algorithm
 I needed to time the algorithm to test how efficient it worked. The check() method was the main component to be tested, but it also carries the burden of 2 other methods to complete during it, generateLetters() at the start and preprocessing during it's checking.
 We already discussed the preprocessing section above and it's average time is 0.07. I needed to time the letters generation aswell in the same manner as above and that came in at 0.9 on average when the user had to input how many vowels they wanted, and 2.5 average when there was no input needed. So far we have 0.97 average on the check method and no checks have been done.
 
-The average time for the check method to complete and return all the results, including the overhead from the other two methods is 2.4 seconds.
+The average time for the check method to complete and return all the results, including the overhead from the other two methods is about 3.1 - 3.5 seconds.
 
-## Efficiency
-Here's some stuff about how efficient my code is, including an analysis of how many calculations my algorithm requires.
+## Step through
+When the check() method runs it calls the preprocessing method that opens the file, and appends all words to a list that are less than nine characters in length. 
+
+It will then call the generateLetters method. This method takes user input and if the input is invalid cuts it shut's down. Once a valid argument is selected it then randomly generates 3 - 5 vowels and the remainder consonants and does a total of ten increments while appending a list and returns the list once finished.
+
+After that the algorithm begins it's loop. It iterates through the processed list and calls the iswordpossible function every iteration passing in the letters and current word. this method splits the letters and words and compares all ten letters to each letter in the word individually. If the word contains any letters the result is True and the loop continues.
+
+Finally the length of the word is stored, and a copy is taken of the dict_list(result) and the length of the word and the word itself are appended the copy, result then takes a copy of the copy object. This is done because if there is any errors along the way the copy object will be set null and we don't lose any of the words in our list. Once the loop finishs the last longest word is printed to the screen.
 
 ## Results
-My script runs very quickly, and certainly within the 30 seconds allowed in the Coutdown letters game.
+All the steps above are executed within 3 - 4 seconds on average. Reading over 100,000 lines of words, generating 10 random letters, looping over every word and comparing it to a list of ten letters, and then coping it and appending it while error catching.
 
 ## References
 [1]: https://en.wikipedia.org/wiki/Countdown_(game_show)
