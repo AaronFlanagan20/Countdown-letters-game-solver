@@ -68,6 +68,39 @@ All the words are then returned in a list for the next function to traverse.
 MAX_LENGTH = 9
 # This preprocessing function loads the words list file into a Python list.
 def preprocessing():
+	contents = []
+	with open('wordlist.txt', 'r') as read:
+		data = read.read()
+		for i in data.split():
+			if len(i) <= MAX_LENGTH:
+				contents.append(i)
+
+	return contents
+```
+
+### Timing Preprocessing
+The above code only needs to be run once. Once a list of words is generated there is no need to regenerate it every time we check for words for the random letters. So I applied the same principle to this section of code as I did to the [parser.py](parser.py) code above. I ran the snippet of code once and the average came in at 0.07 seconds. When ran 10 times the average came in at .75 seconds. Now notice our code looks like the following:
+*Check Update below*
+```python
+read = open('wordlist.txt', 'r')
+data = read.read()
+read.close()
+
+contents = []
+for i in data.split():
+```
+The file being read is returned as a string type and then we iterate through the string, which gives us the 0.07 second average when run once. But when I first iterated through the read object like so: ```for i in read:``` the average time came in at .08 seconds. The more efficient approach for preprocessing my list was to iterate over a very large string Data then the TextIOWrapper object read.
+
+The final snippet of code to test just the preprocessing stage:
+```python
+if __name__ == '__main__':
+	t = timeit.Timer("preprocessing()", "from __main__ import preprocessing")
+	print(t.timeit(1))
+```
+
+*Update*: Over 8000 more words where added to the file so the time to process was increased to    .09 or higher seconds. So I developed a new way to to read and append the file and lowered it back down to anywhere between .082 and .09
+Previously it looked like this:
+```python
 	read = open('wordlist.txt', 'r')
 	data = read.read()
 	read.close()
@@ -80,23 +113,17 @@ def preprocessing():
 	return contents
 ```
 
-### Timing Preprocessing
-The above code only needs to be run once. Once a list of words is generated there is no need to regenerate it every time we check for words for the random letters. So I applied the same principle to this section of code as I did to the [parser.py](parser.py) code above. I ran the snippet of code once and the average came in at 0.07 seconds. When ran 10 times the average came in at .75 seconds. Now notice our code looks like the following 
+Now it looks like:
 ```python
-read = open('wordlist.txt', 'r')
-data = read.read()
-read.close()
+def preprocessing():
+	contents = []
+	with open('wordlist.txt', 'r') as read:
+		data = read.read()
+		for i in data.split():
+			if len(i) <= MAX_LENGTH:
+				contents.append(i)
 
-contents = []
-for i in data.split():
-```
-The file being read is returned as a string type and then we iterate through the string, which gives us the 0.07 second average when run once. But when I first iterated through the read object like so: ```for i in read:``` the average time came in at .8 seconds. The more efficient approach for preprocessing my list was to iterate over a very large string Data then the TextIOWrapper object read.
-
-The final snippet of code to test just the preprocessing stage:
-```python
-if __name__ == '__main__':
-	t = timeit.Timer("preprocessing()", "from __main__ import preprocessing")
-	print(t.timeit(1))
+	return contents
 ```
 
 ## Python script
@@ -183,10 +210,10 @@ def check():
 	#print(max(result[length]))
 ```
 
-Update loop changed because it is faster to call a method once and iterate over it's contents:
+*Update:* loop changed because it is faster to call a method once and iterate over it's contents:
 Before change:
 ```python
-letters = generateLetters()
+	letters = generateLetters()
 	result = {}
 	for word in preprocessing():
 ```

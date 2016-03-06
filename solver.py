@@ -1,6 +1,6 @@
 # Aaron Flanagan
 # G00330035
-# 17/03/2016
+# 06/03/2016
 
 # Import random to shuffle a list.
 import random as rn
@@ -11,14 +11,12 @@ import copy
 MAX_LENGTH = 9
 # This preprocessing function loads the words list file into a Python list.
 def preprocessing():
-	read = open('wordlist.txt', 'r')
-	data = read.read()
-	read.close()
-
 	contents = []
-	for i in data.split():
-		if len(i) <= MAX_LENGTH:
-			contents.append(i)
+	with open('wordlist.txt', 'r') as read:
+		data = read.read()
+		for i in data.split():
+			if len(i) <= MAX_LENGTH:
+				contents.append(i)
 
 	return contents
 
