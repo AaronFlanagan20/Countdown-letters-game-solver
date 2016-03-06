@@ -11,7 +11,7 @@ def parse():
 	##and another page describing how a regular expression pattern works for splitting
 	##http://stackoverflow.com/questions/1276764/stripping-everything-but-alphanumeric-chars-from-a-string-in-python
 	seen = set()
-	##i = 0
+	i = 0
 	for line in g:
 		for a in line.split():##split by spaces
 			newString = re.sub(r'[^a-z]', "", a.lower())## sub all non ascii letters and lowercase them
@@ -19,9 +19,10 @@ def parse():
 				seen.add(newString)##add to set
 				f.write(newString)##write to file
 				f.write("\n")##append line for dictionary format
-				##i = i + 1
+				i = i + 1
 
-	##print("Words in file: ", i)
+	print("Words in file: ", i)
 
-t = timeit.Timer("parse()", "from __main__ import parse")
-print(t.timeit(10))
+parse()
+##t = timeit.Timer("parse()", "from __main__ import parse")
+##print(t.timeit(10))

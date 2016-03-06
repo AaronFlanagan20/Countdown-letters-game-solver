@@ -14,6 +14,8 @@ Next I was on to actually write the algorithm to sort through the words and retu
 My word list is in the file [wordlist.txt](wordlist.txt) in this repository/gist.
 As I explained above I got the original list [meanings.txt](meanings.txt) from [Basic English][1] with over 29,000 words and manually added to it by using old reports and two wordlist files found [here][3]. The final word count comes in at over 105,800 words give or take in the file. 
 
+Update: more words found and added from [Peter Novig][5]. File now has 113,990 words.
+
 ## Parser.py
 My [parser.py](parser.py) file in this repository does the following:
 It loops through the file that was just passed in, [meanings.txt](meanings.txt), and retrieves each word by splitting the spaces between them.
@@ -212,3 +214,4 @@ All the steps above are executed within 3 - 4 seconds on average. Reading over 1
 [2]: http://www.basic-english.org/down/download.html
 [3]: http://www.curlewcommunications.co.uk/wordlist.html
 [4]: http://loskundos.blogspot.ie/2015/03/countdown-word-game-solver-python.html
+[5]: http://norvig.com/big.txt
