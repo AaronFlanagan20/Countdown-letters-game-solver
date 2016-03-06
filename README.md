@@ -224,6 +224,8 @@ We already discussed the preprocessing section above and it's average time is 0.
 
 The average time for the check method to complete and return all the results, including the overhead from the other two methods is about 3.1 - 3.5 seconds.
 
+*Update:* As described above more words have been added and the processing stage has been changed, with this in mind I ran the scripting 2 times, timing the method 10 times each. The first came in at 2.7 seconds everytime it runs. I then took out the user input for vowels and ran it again and the average droped to 2.6 seconds.
+
 ## Step through
 When the check() method runs it calls the preprocessing method that opens the file, and appends all words to a list that are less than nine characters in length. 
 

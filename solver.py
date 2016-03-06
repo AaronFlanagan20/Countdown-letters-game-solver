@@ -63,8 +63,8 @@ def check():
 			result[length] = copy##re appends result with the new word for that word size	
 
 	##le = max(len(x) for x in result)
-	print(result)
-	print(result[sorted(result.keys())[-1]])
+	#print(result)
+	print(result[sorted(result.keys())[-1]])##prints the longest word/words found if same length
 
 def is_word_possible(word, given_chars):
     wordchars = list(word)
@@ -72,7 +72,7 @@ def is_word_possible(word, given_chars):
 
     for character in wordchars:## loops each character in the word passed in
     	if character in u_wordchars:## if chars are the same
-    		u_wordchars[u_wordchars.index(character)] = ''##set it blank to remember
+    		u_wordchars[u_wordchars.index(character)] = ''##set it blank to remember it was checked
     	else:
     		return False##if not return false
 
