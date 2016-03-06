@@ -239,8 +239,8 @@ Finally the length of the word is stored, and a copy is taken of the dict_list(r
 All the steps above are executed within 3 - 4 seconds on average. Reading over 100,000 lines of words, generating 10 random letters, looping over every word and comparing it to a list of ten letters, and then coping it and appending it while error catching.
 
 ## References
-1. [1]: https://en.wikipedia.org/wiki/Countdown_(game_show)
-2. [2]: http://www.basic-english.org/down/download.html
-3. [3]: http://www.curlewcommunications.co.uk/wordlist.html
-4. [4]: http://loskundos.blogspot.ie/2015/03/countdown-word-game-solver-python.html
-5. [5]: http://norvig.com/big.txt
+[1]: https://en.wikipedia.org/wiki/Countdown_(game_show)
+[2]: http://www.basic-english.org/down/download.html
+[3]: http://www.curlewcommunications.co.uk/wordlist.html
+[4]: http://loskundos.blogspot.ie/2015/03/countdown-word-game-solver-python.html
+[5]: http://norvig.com/big.txt

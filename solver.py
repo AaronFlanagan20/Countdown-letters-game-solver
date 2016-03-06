@@ -33,20 +33,20 @@ def generateLetters():
 		sys.exit()
 	
 	count = 1
-	while count < 10:## does nine iterations
-		while count <= int(x):##while less than users input number
-			choice = rn.choice(vowels)##choose a random vowel
-			count = count + 1##increment counter
-			generatedLetters.append(choice)##add vowel to the list
+	while count < 10:
+		while count <= int(x):
+			choice = rn.choice(vowels)
+			count = count + 1
+			generatedLetters.append(choice)
 
-		count = count + 1##increment counter
-		generatedLetters.append(rn.choice(consonents))##add consonent to list
+		count = count + 1
+		generatedLetters.append(rn.choice(consonents))
 
 	return generatedLetters
 	
   
 # This is the function that actually checks the random letters for words.
-##adpated from http://loskundos.blogspot.ie/2015/03/countdown-word-game-solver-python.html
+## used from http://loskundos.blogspot.ie/2015/03/countdown-word-game-solver-python.html
 def check():
 	p = preprocessing()
 	letters = generateLetters()
