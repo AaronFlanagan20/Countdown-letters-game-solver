@@ -5,6 +5,16 @@
 As part of a module, Theory of Algorithms, for my final year I had to write this algorithm to solve the [Countdown letters game][1].
 I also had to write a report about the algorithm and compare different methods and the efficiency of each method. This included research into various Python optimization techniques and how to properly time each method taking into consideration some functions need only be run once but might take a considerate amount of time for I/O, like writing to a file or printing results.
 
+#My Analsyis Approach
+One common mistake spotted in a lot of different algorithms is storage isn't considered on top of time. It's great if you can write and solve and object comparator algorithm that takes in 10,000 objects and compares them, but how efficient is it when you run out of memory half way through, if you make it that far. An algorithm isn't only defined by how fast it completes or even by its optimality, it's efficiency is also measured by it's ability to adapt. With any algorithm [Combonatorial explosion][6] can become a huge problem. If handed more inputs will it crash or still finish with a decent amount of extra time depending on how large the input is. An example would be the quicksort and mergesort algorithms. Quicksort is faster with smaller arrays but as the input increases mergesort comes out faster. So for this project I made three different analysis', timing, memory and adaptability.
+
+1. I will time each section individually to show the importance of un-importance of each function.
+
+2. I will discuss the memory at the end taking the whole algoritm into account.
+
+3. The adaptabiliy will be seen in the *Update* sections where I changed code and added more and more words to my wordlist.
+
+
 ## Background
 The first task was to find a wordlist with a decent amount of words. I got a word list from [Basic English][2] with over 29,000 words in it, which is quite small.
 From there I opened a few old reports, assignments and books and pasted a lot of text into the file to increase the word count. I then wrote [parser.py](parser.py) to strip out and seperate all the words into a dictionary type format.
@@ -235,8 +245,26 @@ After that the algorithm begins it's loop. It iterates through the processed lis
 
 Finally the length of the word is stored, and a copy is taken of the dict_list(result) and the length of the word and the word itself are appended the copy, result then takes a copy of the copy object. This is done because if there is any errors along the way the copy object will be set null and we don't lose any of the words in our list. Once the loop finishs the last longest word is printed to the screen.
 
+
+#Memory
+Memory won't be a big issue for my algoritm, but on the topic of algorithm's it is always worth will doing some checking.
+
+First of all I used a file [meanings.txt](meanings.txt) that contained 29,000 words and I added to it. This file is only used in the preprocessing stage. I read in my file to an object 'read'. It's size comes in at 216 bytes, which is taken from opening a 13,094 kilobyte file. I then split the words in read by the white spaces and store them in data. Data consists of one word lines for over 113,000 rows. It's size is 1101988 bytes, which is 1.1 megabytes approximately. Data is appending to the contents list and then made null. Contents size is similar in which it's size its 651,352 bytes / 1024 is 65 kilobytes. This is then returned to the check function.
+
+The generateLetters function is a small function and returns a list of 10 letters at the size of 136 bytes.
+
+The check function uses our contents list to append its own dict object with words in it that contain the letters we generate. A python dict object is 288 bytes in size but even when a list of maybe 20 words or more are appended. It doesn't change in size.
+
+Object size's are returned for Python >2.6 in bytes using
+```python
+try:
+		print(sys.getsizeof(result))
+	except AttributeError:
+		print("sys.getsizeof exists in Python ")
+```
+
 ## Results
-All the steps above are executed within 3 - 4 seconds on average. Reading over 100,000 lines of words, generating 10 random letters, looping over every word and comparing it to a list of ten letters, and then coping it and appending it while error catching.
+All the steps above are executed within 2 - 3 seconds. Reading over 113,000 lines of words, generating 10 random letters, looping over every word, comparing it to a list of ten letters and then copying it and appending it to an results dict object, it will them complete the same cycle again for over 113,000 words in my list. But I only timed the algorithm and gave a step by step synopsis. I went and done updates in areas that mostly needed to be optimized, like the preprocessing stage, which could be considered a very important part to the overall completion and run-time of the algorithm. Example my list contains 100,000+ words and completes its procesing in just under a second. The oxford english dictionary contains 350,000+ words. That means if I passed in that list my procssing stage triples and a half in the time to complete, 3.5 seconds. In my Analysis I explain above why it was important to optimize. I didn't try optimize the generateLetters function though because I wasn't concerned with it's running time, only the running time of the comparisons. The letters time will always run the same because it can never get any bigger this is only 26 possible letters of which can be chosen. Countdown also states that it randomizes letters based on their use in the English language, meaning not all of them are used and some may appear more than others.
 
 ## References
 [1]: https://en.wikipedia.org/wiki/Countdown_(game_show)
@@ -244,3 +272,4 @@ All the steps above are executed within 3 - 4 seconds on average. Reading over 1
 [3]: http://www.curlewcommunications.co.uk/wordlist.html
 [4]: http://loskundos.blogspot.ie/2015/03/countdown-word-game-solver-python.html
 [5]: http://norvig.com/big.txt
+[6]: https://en.wikipedia.org/wiki/Combinatorial_explosion

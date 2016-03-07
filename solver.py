@@ -14,10 +14,12 @@ def preprocessing():
 	contents = []
 	with open('wordlist.txt', 'r') as read:
 		data = read.read()
+		read.close()
 		for i in data.split():
 			if len(i) <= MAX_LENGTH:
 				contents.append(i)
-
+	
+		data = None##data is large in memory, set None to clear it up
 	return contents
 
 ## adapated from http://stackoverflow.com/questions/2823316/generate-a-random-letter-in-python
@@ -51,6 +53,10 @@ def check():
 	p = preprocessing()
 	letters = generateLetters()
 	result = {}	
+	try:
+		print(sys.getsizeof(result))
+	except AttributeError:
+		print("sys.getsizeof exists in Python ")
 	for word in p:
 		if is_word_possible(word, letters):## returns True if any letter is in word
 			length = len(word)
